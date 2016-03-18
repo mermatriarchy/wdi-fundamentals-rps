@@ -4,7 +4,7 @@
 'use strict';
 
 function getInput() {
-    console.log("Please choose either 'rock', 'paper', or 'scissors'.")
+    console.log("Please choose either 'rock', 'paper', or 'scissors'.");
     return prompt();
 }
 function randomPlay() {
@@ -21,29 +21,45 @@ function randomPlay() {
 /*           Write Your Code Below            */
 ////////////////////////////////////////////////
 
-function getPlayerMove(move) {
-	return move || getInput();
-}
+//I combined my code into a single function.
+//The while statement was used to build the playToFive function
+//and the if-else statement embedded within it was initially my
+//getWinner function before I combined the two.
 
-function getComputerMove(move) {
-    ComputerMove = move || randomPlay();
-}
+//When this function is called, it repeatedly asks for input
+//until either the player or the computer has won five rounds
+//and then logs the results to the console. Adding another function
+//to alert() the winner of each round could be used to notify the player
+//of the outcome of each round during the execution.
 
-function getWinner(playerMove,computerMove) {
-    var winner;
-    // Write code that will set winner to either 'player', 'computer', or 'tie' based on the values of playerMove and computerMove.
-    // Assume that the only values playerMove and computerMove can have are 'rock', 'paper', and 'scissors'.
-    // The rules of the game are that 'rock' beats 'scissors', 'scissors' beats 'paper', and 'paper' beats 'rock'.
-    /* YOUR CODE HERE */
-    return winner;
-}
-
-function playToFive() {
+var playToFive = function(){
     console.log("Let's play Rock, Paper, Scissors");
     var playerWins = 0;
     var computerWins = 0;
-    // Write code that plays 'Rock, Paper, Scissors' until either the player or the computer has won five times.
-    /* YOUR CODE HERE */
-    return [playerWins, computerWins];
-}
-
+    var round = 1;
+  while (playerWins < 6 && computerWins < 6){
+//Assigning the provided code to a var seemed like the most efficient
+//way to use them; alternatively, using these functions would also work:
+//function getPlayerMove(move){
+//    return move || getInput(); }
+//function getComputerMove(move){
+//    return move || randomPlay(); }
+   var playerMove = getInput();
+   var computerMove = randomPlay();
+        if (((playerMove === 'rock') && (computerMove === 'scissors')) ||
+            ((playerMove === 'scissors') && (computerMove === 'paper')) ||
+            ((playerMove === 'paper') && (computerMove === 'rock'))) {
+          console.log("Round: " + round + "\nPlayer: " + playerMove +"\nComputer: " + computerMove + "\nScore is " + "\nPlayer: " + playerWins + ", Computer " + computerWins);
+          playerWins ++;
+          round ++;
+        } else if (playerMove === computerMove) {
+          console.log("Round: " + round + " \nIt's a tie. \nScore remains \nPlayer: " + playerWins + " Computer: " + computerWins + ".");
+          round ++;       
+        } else {
+          console.log("Round: " + round + "\nPlayer: " + playerMove +"\nComputer: " + computerMove + "\nScore is " + "\nPlayer: " + playerWins + ", Computer " + computerWins);
+          computerWins ++;
+          round++;
+        }
+  }
+};
+playToFive();
